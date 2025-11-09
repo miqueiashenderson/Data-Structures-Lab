@@ -22,5 +22,7 @@ produto/ProdutoNaoPerecivel.class
 produto/RepositorioProdutoNaoPerecivelArray.class
 banco/BancoInvestimentos.class
 solucao/produto/RepositorioProdutoPerecivelArraySolucao.class
+produto/RepositorioProduto.class
 solucao/forma/Quadrado.class
 produto/ProdutoPerecivel.class
+produto/RepositorioProdutoArray.class
