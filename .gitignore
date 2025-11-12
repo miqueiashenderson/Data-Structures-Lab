@@ -1,0 +1,23 @@
+# Ignora a pasta de build principal do Maven
+/target/
+
+# Ignora pastas de build do Maven em qualquer subdiretório (RR1, RR2, etc)
+**/target/
+
+# Ignora arquivos de log
+*.log
+
+# Ignora arquivos compactados e de build
+*.zip
+*.jar
+*.war
+
+# Ignora arquivos de classe compilados (vi alguns soltos na sua pasta 'forma')
+*.class
+
+# Ignora arquivos de configuração de IDEs comuns
+.idea/
+.vscode/
+*.iml
+*.nbproject/
+*.project
