@@ -11,23 +11,22 @@ import java.util.ArrayList;
  *
  * @author Adalberto
  */
-public class RepositorioProdutoArrayList {
+public class RepositorioProdutoArrayList implements RepositorioProduto {
 
 	/**
 	 * A estrutura onde os produtos sao mantidos. Voce nao precisa se preocupar
 	 * por enquanto com o uso de generics em ArrayList.
 	 */
-	private ArrayList produtos;
+	private ArrayList<Produto> produtos;
 
 	/**
 	 * A posicao do ultimo elemento inserido no array de produtos. o valor
 	 * inicial é -1 para indicar que nenhum produto foi ainda guardado no array.
 	 */
-	private int index = -1;
 
 	public RepositorioProdutoArrayList(int size) {
 		super();
-		this.produtos = new ArrayList();
+		this.produtos = new ArrayList(size);
 	}
 
 	/**
@@ -40,8 +39,13 @@ public class RepositorioProdutoArrayList {
 	 * @return
 	 */
 	private int procurarIndice(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		for(int i = 0; i < produtos.size(); i++){
+			if(produtos.get(i).getCodigo() == codigo){
+				return i;
+			}
+		}
+		return -1;
+
 	}
 
 	/**
@@ -51,16 +55,14 @@ public class RepositorioProdutoArrayList {
 	 * @return
 	 */
 	public boolean existe(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return this.procurarIndice(codigo) != -1;
 	}
 
 	/**
 	 * Insere um novo produto (sem se preocupar com duplicatas)
 	 */
 	public void inserir(Produto produto) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		produtos.add(produto);
 	}
 
 	/**
@@ -69,8 +71,14 @@ public class RepositorioProdutoArrayList {
 	 * utilizado.
 	 */
 	public void atualizar(Produto produto) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		Produto p = produto;
+		int index = procurarIndice(p.getCodigo());
+		
+		if(index != -1 ){
+			this.produtos.set(index, produto);
+		} else {
+			throw new RuntimeException("Produto não encontrado");
+		}
 	}
 
 	/**
@@ -81,8 +89,13 @@ public class RepositorioProdutoArrayList {
 	 * @param codigo
 	 */
 	public void remover(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int index = procurarIndice(codigo);
+		
+		if(index != -1){
+			produtos.remove(index);
+		} else { 
+				throw new RuntimeException("Produto não encontrado");
+		}
 	}
 
 	/**
@@ -93,7 +106,13 @@ public class RepositorioProdutoArrayList {
 	 * @return
 	 */
 	public Produto procurar(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int index = procurarIndice(codigo);
+		
+		if(index != -1){	
+			return produtos.get(index);
+		} else {
+ 			return null;
+		}
+
 	}
 }

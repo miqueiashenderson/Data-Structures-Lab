@@ -15,7 +15,6 @@ package produto;
  *
  */
 public class RepositorioProdutoPerecivelArray {
-
 	/**
 	 * A estrutura (array) onde os produtos sao mantidos.
 	 */
@@ -42,8 +41,15 @@ public class RepositorioProdutoPerecivelArray {
 	 * @return
 	 */
 	private int procurarIndice(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		
+		for (int i = 0; i<=this.index; i++){
+			if(this.produtos[i] != null){
+				if (this.produtos[i].getCodigo() == codigo){
+				return i;
+				}
+			}
+		}
+		return -1;
 	}
 
 	/**
@@ -53,16 +59,21 @@ public class RepositorioProdutoPerecivelArray {
 	 * @return
 	 */
 	public boolean existe(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return procurarIndice(codigo) != -1;
 	}
 
 	/**
 	 * Insere um novo produto (sem se preocupar com duplicatas)
 	 */
 	public void inserir(ProdutoPerecivel produto) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		this.index += 1;
+
+		if(this.index < this.produtos.length){
+			this.produtos[this.index] = produto;
+		} else {
+			this.index -= 1;
+			throw new RuntimeException("Repósitorio está cheio");
+		}
 	}
 
 	/**
@@ -71,8 +82,12 @@ public class RepositorioProdutoPerecivelArray {
 	 * utilizado.
 	 */
 	public void atualizar(ProdutoPerecivel produto) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int index = procurarIndice(produto.getCodigo());
+		if(index != -1){
+			this.produtos[index] = produto;
+		} else {
+			throw new RuntimeException("Produto não existe");
+		}
 	}
 
 	/**
@@ -83,8 +98,18 @@ public class RepositorioProdutoPerecivelArray {
 	 * @param codigo
 	 */
 	public void remover(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+        int indexParaRemover = procurarIndice(codigo);
+
+        if (indexParaRemover != -1) {
+            for (int i = indexParaRemover; i < this.index; i++) {
+                this.produtos[i] = this.produtos[i + 1];
+            }
+            this.produtos[this.index] = null;
+            this.index -= - 1;
+
+        } else {
+            throw new RuntimeException("Erro: Produto com código " + codigo + " não existe no repositório.");
+        }
 	}
 
 	/**
@@ -95,7 +120,12 @@ public class RepositorioProdutoPerecivelArray {
 	 * @return
 	 */
 	public ProdutoPerecivel procurar(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int index = procurarIndice(codigo);
+		if (index != -1){
+			return this.produtos[index]; 
+		} else {
+			throw new RuntimeException("ProdutoPerecivel não existe");
+		}
 	}
+
 }
