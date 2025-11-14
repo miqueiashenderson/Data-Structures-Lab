@@ -1,5 +1,6 @@
 package sorting.simpleSorting;
 
+import util.Util;
 import sorting.AbstractSorting;
 
 /**
@@ -8,11 +9,18 @@ import sorting.AbstractSorting;
  * which means it only needs to find the right position for the current element
  * and insert it there.
  */
+
 public class InsertionSort<T extends Comparable<T>> extends AbstractSorting<T> {
 
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not Implemented yet!");
+		for(int i = leftIndex + 1; i <= rightIndex; i++){
+			int j = i;
+
+			while (j > leftIndex && array[j].compareTo(array[j - 1]) < 0) {
+				Util.swap(array, j, j - 1);
+				j -= 1;
+			}
+		}
 	}
 }
